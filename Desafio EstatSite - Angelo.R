@@ -1,4 +1,4 @@
-# Carregando pacotes que serão utilizados
+# Carregando pacotes que serao utilizados
 library(readr)
 library(tidyverse)
 library(hrbrthemes)
@@ -7,9 +7,9 @@ library(lubridate)
 
 
 # Carregando dataset Fifa
-fifa19 <- read_csv("C:/Users/angel/Downloads/ESTUDOS DIVERSOS/Desafio EstatSite/Bases de Dados/fifa19.csv")
+fifa19 <- read_csv("fifa19.csv")
 
-######## 1.Se fossemos classificar a força dos clubes de acordo com a média do campo Overall de seus jogadores,
+######## 1.Se fossemos classificar a forma dos clubes de acordo com a media do campo Overall de seus jogadores,
 ######## considerando somente clubes com pelo menos 25 jogadores, qual seria o clube mais forte? E o mais fraco?
 
 glimpse(fifa19)
@@ -40,10 +40,10 @@ dataset_overall[1,1]
 # clube mais fraco
 dataset_overall[nrow(dataset_overall),1]
 
-######## 2.Se fossemos olhar somente para os 20 melhores jogadores de cada seleção, qual nação teria o time
-######## mais forte utilizando o critério da média do Overall de seus jogadores? Em outras palavras, 
-######## filtre somente os 20 melhores jogadores de cada seleção, sendo o critério de "melhor" o campo
-######## Overall, e, utilizando o mesmo campo, verifique qual seleção tem a melhor média.
+######## 2.Se fossemos olhar somente para os 20 melhores jogadores de cada sele??o, qual na??o teria o time
+######## mais forte utilizando o crit?rio da m?dia do Overall de seus jogadores? Em outras palavras, 
+######## filtre somente os 20 melhores jogadores de cada sele??o, sendo o crit?rio de "melhor" o campo
+######## Overall, e, utilizando o mesmo campo, verifique qual sele??o tem a melhor m?dia.
 
 melhores_da_selecao <- fifa19 %>% 
   group_by(Nationality) %>% 
@@ -61,13 +61,13 @@ melhores_da_selecao %>%
   arrange(desc(Ovr_medio_selecao))
 
 
-####### 3.Neste exercício, considere o campo Release Clause como sendo o valor do jogador. Considerando
-####### somente os clubes que possuem mais de 25 jogadores, quais são os 5 clubes mais valiosos?
+####### 3.Neste exerc?cio, considere o campo Release Clause como sendo o valor do jogador. Considerando
+####### somente os clubes que possuem mais de 25 jogadores, quais s?o os 5 clubes mais valiosos?
 
 
 clubes_valiosos <- fifa19 %>%
- mutate(unidade_contagem_valor = str_sub(`Release Clause`,-1),
-        release_clause = as.numeric(str_sub(`Release Clause`,2,-2)))
+  mutate(unidade_contagem_valor = str_sub(`Release Clause`,-1),
+         release_clause = as.numeric(str_sub(`Release Clause`,2,-2)))
 
 clubes_valiosos %>% 
   count(unidade_contagem_valor)
@@ -86,11 +86,11 @@ clubes_valiosos %>%
   arrange(desc(valor_mercado)) %>% 
   slice_head(n = 5)
 
-####### 4.Imagine que você é diretor de um clube e possui um certo orçamento para comprar 11 jogadores que
+####### 4.Imagine que voce é diretor de um clube e possui um certo orcamento para comprar 11 jogadores que
 ####### irão compor o time titular. Cada jogador é contratado de acordo com a release clause. O presidente
 ####### deseja trazer jogadores jovens, sendo assim, pede que você não contrate ninguém acima de 29 anos. O
-####### presidente também demanda que você não traga nenhuma estrelinha que possa conturbar o elenco, sendo
-####### assim, o preço máximo a ser pago por um jogador não pode ultrapassa os 15 milhões de euros. Quais
+####### presidente também demanda que você n?o traga nenhuma estrelinha que possa conturbar o elenco, sendo
+####### assim, o preço máximo a ser pago por um jogador não pode ultrapassar os 15 milh?es de euros. Quais
 ####### são os 11 jogadores de maior Overall que você consegue trazer para seu clube? Isto, é claro, 
 ####### seguindo as restrições orçamentárias e etárias impostas pelo seu chefe.
 
@@ -126,9 +126,9 @@ histogramas <- contratacoes %>%
 histogramas <- histogramas %>%
   mutate(
     unidade_medida_peso = str_sub(Weight,-3),
-         peso = as.numeric(str_sub(Weight, 1, -4)),
-         unidade_medida_salario = str_sub(Wage, -1),
-         salario = as.numeric(str_sub(Wage,2, -2)))
+    peso = as.numeric(str_sub(Weight, 1, -4)),
+    unidade_medida_salario = str_sub(Wage, -1),
+    salario = as.numeric(str_sub(Wage,2, -2)))
 
 
 histogramas %>% 
@@ -154,14 +154,14 @@ histogramas %>%
   geom_histogram(binwidth = 10, fill = "green", alpha = 0.5) +
   theme_ipsum_es() +
   scale_x_continuous(breaks = extended_breaks(n = 10)) +
-  labs(title = "Histograma - Salário dos Jogadores\n(mil Euros)",
+  labs(title = "Histograma - Sal?rio dos Jogadores\n(mil Euros)",
        x = "Salário",
        y = "Contagem")
 
 
 #Dataset Iris
 
-Iris <- read_csv("C:/Users/angel/Downloads/ESTUDOS DIVERSOS/Desafio EstatSite/Bases de Dados/Iris.csv")
+Iris <- read_csv("Iris.csv")
 
 ######## 7.Através de um gráfico de dispersão (scatterplot), verifique se há relação linear entre 
 ######## comprimento da pétala (Petal Length) e o comprimento da sépala (Sepal Length). Adicione também 
@@ -179,10 +179,10 @@ Iris %>%
        x = "Comprimento - Sépala",
        y = "Comprimento - Pétala")
 
-######## 8.Primeiro, apague a substring "Iris-" da coluna Species. Em seguida, adicione 3 novas colunas à
+######## 8.Primeiro, apague a substring "Iris-" da coluna Species. Em seguida, adicione 3 novas colunas e
 ######## tabela inicial, sendo que cada coluna receberá uma dummy referente a cada uma das species. Ou
 ######## seja, você deve criar uma coluna chamada Dummy_Setosa, que recebe 1 se a flor for da espécie 
-######## Setosa e 0 caso contrário. O mesmo para as demais espécies.
+######## Setosa e 0 caso contr?rio. O mesmo para as demais espécies.
 
 iris_dummy <- Iris %>% 
   mutate(Species = str_sub(Species,6,-1))
@@ -200,8 +200,8 @@ iris_dummy <- iris_dummy %>%
 ######## evolução do preço de abertura das duas ações no mesmo período. Utilize cores diferentes para cada
 ######## linha e insira uma legenda para as cores/linhas. A legenda deve ficar no canto inferior direito
 
-renner <- read_csv("C:/Users/angel/Downloads/ESTUDOS DIVERSOS/Desafio EstatSite/Bases de Dados/LREN3.SA.csv")
-magalu <- read_csv("C:/Users/angel/Downloads/ESTUDOS DIVERSOS/Desafio EstatSite/Bases de Dados/MGLU3.SA.csv")
+renner <- read_csv("LREN3.SA.csv")
+magalu <- read_csv("MGLU3.SA.csv")
 
 glimpse(renner)
 
@@ -241,8 +241,8 @@ magalu_agrupado %>%
 
 #Datasets Compra e Cadastro
 
-######## 10.A tabela COMPRAS possui as informações de todas as compras feitas pelos clientes da sua loja. Em
-######## CADASTRO, você encontrará as informações cadastrais dos seus clientes. Monte uma nova tabela
+######## 10.A tabela COMPRAS possui as informalções de todas as compras feitas pelos clientes da sua loja. Em
+######## CADASTRO, você encontrará as informa??es cadastrais dos seus clientes. Monte uma nova tabela
 ######## chamada RESUMO. Essa tabela terá uma linha por cliente e as colunas serão os campos: Id, Idade,
 ######## Estado, Gasto_Total. As primeiras colunas são auto-explicativas e podem ser obtidas diretamente
 ######## na tabela COMPRAS. A última coluna deve trazer a soma de todas as compras feitas por cada cliente.
@@ -251,10 +251,10 @@ magalu_agrupado %>%
 ######## para cada estado.
 
 
-cadastro <- read_delim("C:/Users/angel/Downloads/ESTUDOS DIVERSOS/Desafio EstatSite/Bases de Dados/CADASTRO.csv", 
+cadastro <- read_delim("CADASTRO.csv", 
                        delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-compras <- read_delim("C:/Users/angel/Downloads/ESTUDOS DIVERSOS/Desafio EstatSite/Bases de Dados/COMPRAS.csv", 
+compras <- read_delim("COMPRAS.csv", 
                       delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 glimpse(cadastro)
@@ -296,7 +296,7 @@ resumo %>%
   coord_flip() +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
-        ) +
+  ) +
   labs(title = "Boxplot - Idade dos Clientes") +
   theme_ipsum_es()
 
@@ -341,16 +341,16 @@ faixa_etaria %>%
        y = "Gasto Médio (R$)",
        fill = "Grupo Etário") +
   theme_ipsum_es()
-                     
 
-######## 13.Crie uma função que, dado um número X, faça duas coisas: (1) retorna os números pares de 1 a 9
+
+######## 13.Crie uma funçãoo que, dado um número X, faça duas coisas: (1) retorna os números pares de 1 a 9
 ######## que não fazem parte de X; (2) retorna uma mensagem indicando se o número é par ou ímpar.
 ######## Exemplo: se passarmos o número 239, a função deve retornar 4, 6, 8 e "ímpar". Pode ser em forma
 ######## de duas mensagens ou uma mensagem com os números e a definição de par ou ímpar. A escolha é sua.
 
 
 testa_numero <- function(numero){
-  # retorna pares não inclusos no numero
+  # retorna pares n?o inclusos no numero
   pares <- c()
   for(i in 1:9){
     if(i %% 2 == 0){
@@ -360,7 +360,7 @@ testa_numero <- function(numero){
   }
   digitos <- as.integer(str_split(numero,"")[[1]])
   print(setdiff(pares,digitos))
-  # indica se é par ou impar
+  # indica se ? par ou impar
   if (numero %% 2 != 0)
     return("Número ímpar")
   else
@@ -395,7 +395,7 @@ percentil <- function(vetor, percentil){
   x <- array(data = vetor, dim = c(length(vetor), 1))
   x <- x[order(x[,1]),]
   if(length(x) %% 2 == 0){
-  posicao <- x[(percentil/100)*length(x)]  
+    posicao <- x[(percentil/100)*length(x)]  
   } else {
     if(((percentil/100)*length(x)-as.integer((percentil/100)*length(x)))>=0.5){
       posicao <- x[(percentil/100)*length(x)+1] 
